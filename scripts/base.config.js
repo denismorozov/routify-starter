@@ -8,6 +8,7 @@ import copy from 'rollup-plugin-copy'
 import del from 'del'
 import replace from '@rollup/plugin-replace';
 import { spassr } from 'spassr'
+import typescript from '@rollup/plugin-typescript'
 
 const isNollup = !!process.env.NOLLUP
 
@@ -45,18 +46,18 @@ function baseConfig(config, ctx) {
         : { format: 'iife', file: `${buildDir}/bundle.js` }
 
     const _svelteConfig = {
-        dev: !production, // run-time checks      
+        dev: !production, // run-time checks
         // Extract component CSS — better performance
         css: css => css.write(`${buildDir}/bundle.css`),
         hot: isNollup,
     }
-    
+
     const svelteConfig = svelteWrapper(_svelteConfig, ctx) || _svelteConfig
 
     const _rollupConfig = {
         inlineDynamicImports: !dynamicImports,
         preserveEntrySignatures: false,
-        input: `src/main.js`,
+        input: `src/main.ts`,
         output: {
             name: 'routify_app',
             sourcemap: true,
@@ -83,6 +84,8 @@ function baseConfig(config, ctx) {
             production && terser(), // minify
             !production && isNollup && Hmr({ inMemory: true, public: staticDir, }), // refresh only updated code
             !production && !isNollup && livereload(distDir), // refresh entire window when code is updated
+
+            typescript({ sourceMap: !production }),
         ],
         watch: {
             clearScreen: false,
@@ -124,6 +127,6 @@ function serviceWorkerConfig(config) {
         ]
     }
     const rollupConfig = swWrapper(_rollupConfig, {}) || _rollupConfig
-    
+
     return rollupConfig
 }
