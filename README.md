@@ -1,3 +1,20 @@
+# denismorozov/routify-starter
+
+This template forks the official Routify rollup starter and extends it with the following:
+- TypeScript
+- SCSS w/ PostCSS autoprefixing, and opinionated style project structure
+
+## Get started
+
+1. Clone, fork, or npx degit this repository: `git clone git@github.com:denismorozov/routify-starter.git`
+2. Go through the items in [docs/new-project-todo.md](docs/new-project-todo.md).
+
+## TODO eventually
+- Testing, maybe cypress
+- Linting, both eslint and prettier seem to not work with svelte-preprocess yet
+- Document pulling in upstream updates (from official routify starter)
+
+
 # routify-starter
 
 Starter template for [Routify](https://github.com/sveltech/routify)
