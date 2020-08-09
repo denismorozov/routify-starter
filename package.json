@@ -1,12 +1,20 @@
 {
   "name": "svelte-app",
   "version": "1.0.0",
+  "description": "",
+  "repository": "",
+  "author": "Denis Morozov <morozovsdenis@gmail.com> (https://denismorozov.com)",
+  "license": "MIT",
+  "private": true,
+
   "scripts": {
-    "check": "svelte-check",
     "dev": "run-p routify rollup",
     "dev:nollup": "run-p routify nollup",
     "dev-dynamic": "cross-env BUNDLING=dynamic npm run dev",
-    "build": "routify -b && rollup -c && routify export && workbox injectManifest",
+    "build": "routify -b && rollup -c && workbox injectManifest",
+    "build:prerender": "routify -b && rollup -c && routify export && workbox injectManifest",
+    "check": "svelte-check",
+    "test": "echo todo",
     "serve": "spassr --serve-spa --serve-ssr",
     "export": "routify export",
     "build:docker": "npm run build && ./scripts/docker/docker-build.sh",
